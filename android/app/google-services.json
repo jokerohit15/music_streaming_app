@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "48580419363",
+    "project_id": "practice-projects-7c9bf",
+    "storage_bucket": "practice-projects-7c9bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48580419363:android:45fb65ce73a188ab7b3696",
+        "android_client_info": {
+          "package_name": "com.example.music_streaming_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-XVGdrY9Nk2u0Xx4GH4kExuyPy83m9w4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
