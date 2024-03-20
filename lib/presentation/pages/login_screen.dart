@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:music_streaming_app/core/app_constants/app_images.dart';
 import 'package:music_streaming_app/core/app_constants/string_constants.dart';
 import 'package:music_streaming_app/core/extensions/extension.dart';
-import 'package:music_streaming_app/core/service_locator.dart';
 import 'package:music_streaming_app/presentation/bloc/login/login_cubit.dart';
 import 'package:music_streaming_app/presentation/widgets/theme_button.dart';
 

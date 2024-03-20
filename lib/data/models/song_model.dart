@@ -7,7 +7,7 @@ class SongModel{
   final String album;
   final String audio;
   final String albumArt;
-  final List<String> artist;
+  final List<dynamic> artist;
   final int yearOfRelease;
 
   SongModel({required this.name, required this.album, required this.audio, required this.albumArt, required this.artist, required this.yearOfRelease});
@@ -19,7 +19,7 @@ class SongModel{
       audio : data[AppKeys.audioKey],
       albumArt : data[AppKeys.albumArtKey],
       artist:data[AppKeys.artistKey],
-      yearOfRelease: data[AppKeys.yearOfReleaseKey],
+      yearOfRelease: data[AppKeys.yearOfReleaseKey]??11,
   );
   }
 

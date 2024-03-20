@@ -5,9 +5,12 @@ import 'package:music_streaming_app/core/app_constants/app_colors.dart';
 import 'package:music_streaming_app/core/app_constants/app_images.dart';
 import 'package:music_streaming_app/core/app_constants/string_constants.dart';
 import 'package:music_streaming_app/core/extensions/extension.dart';
+import 'package:music_streaming_app/core/service_locator.dart';
 import 'package:music_streaming_app/core/theme/theme_provider.dart';
 import 'package:music_streaming_app/presentation/bloc/home/home_cubit.dart';
 import 'package:music_streaming_app/presentation/bloc/home/home_state.dart';
+import 'package:music_streaming_app/presentation/bloc/main/main_cubit.dart';
+import 'package:music_streaming_app/presentation/bloc/main/main_state.dart';
 import 'package:music_streaming_app/presentation/widgets/music_list.dart';
 import 'package:music_streaming_app/presentation/widgets/theme_button.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +22,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    return BlocProvider(
-      create: (context) => HomeCubit(),
+    return BlocProvider<HomeCubit>(
+      create: (context) => getIt<HomeCubit>(),
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -62,10 +65,44 @@ class HomeScreen extends StatelessWidget {
                         );
                       }),
                 ),
-                const MusicList(title: StringConstants.monthlyHits),
-                const MusicList(title: StringConstants.lastPlayed),
-                const MusicList(title: "Party"),
-                const MusicList(title: StringConstants.soothYourself),
+                BlocBuilder<MainCubit, MainState>(
+                  builder: (context, state) {
+                    if (state is MainLoaded) {
+                      return Column(
+                        children: [
+                          MusicList(
+                            title: StringConstants.monthlyHits,
+                            songs: state.monthlyHits,
+                          ),
+                          MusicList(
+                            title: StringConstants.lastPlayed,
+                            songs: state.songList,
+                          ),
+                          MusicList(
+                            title: "Party",
+                            songs: state.monthlyHits,
+                          ),
+                          MusicList(
+                            title: StringConstants.soothYourself,
+                            songs: state.songList,
+                          ),
+                        ],
+                      );
+                    }
+                    else if(state is MainError)
+                      {
+                        return Container(
+                          width: 0.5.sw,
+                          height: 0.1.sh,
+                          color: Theme.of(context).primaryColor,
+                          child: Text(state.errorMessage,style: Theme.of(context).textTheme.titleLarge!.copyWith(color:AppColors.redColor),),
+                        );
+                      }
+                    else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
+                ),
                 ThemeButton(
                   title: "sds",
                   onTap: () =>
@@ -115,27 +152,3 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// Widget filterBox(HomeCubit bloc, int index,TextTheme textTheme) {
-//   return Stack(
-//     children: [
-//       bloc.filterList[index].isActive ?  Image.asset("assets/panda_logo.png",height: 0.2.sh,width: 0.2.sw,fit: BoxFit.cover,) : SizedBox.shrink(),
-//       Align(
-//         alignment: Alignment.bottomCenter,
-//         child: GestureDetector(
-//           onTap:()=> bloc.onPressFilter(index),
-//           child: Container(
-//             width: 0.2.sw,
-//             height: 0.04.sh,
-//            margin: EdgeInsets.only(top: 0.05.sh),
-//            // padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
-//             decoration: BoxDecoration(
-//               borderRadius: BorderRadius.circular(22),
-//               color: bloc.filterList[index].isActive ? AppColors.brandColor : AppColors.greyColor,
-//             ),
-//             child: Center(child: Text(bloc.filterList[index].title,style: textTheme.titleLarge!.copyWith(color: AppColors.secondaryColor),)),
-//           ),
-//         ),
-//       ),
-//     ],
-//   ).paddingLTRB(right: 0.03.sw,top: 0.01.sh);
-//}

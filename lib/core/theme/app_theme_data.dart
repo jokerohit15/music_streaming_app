@@ -31,7 +31,7 @@ class AppThemeData {
 
   factory AppThemeData.lightTheme() {
     return AppThemeData(
-        primaryColor: AppColors.brandColor,
+        primaryColor: AppColors.secondaryColor,
         primaryColorLight: AppColors.whiteColor,
         primaryColorDark: AppColors.blackColor,
         displayLargeTextStyle: const TextStyle(

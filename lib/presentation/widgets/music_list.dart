@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:music_streaming_app/core/app_constants/app_colors.dart';
 import 'package:music_streaming_app/core/app_constants/string_constants.dart';
 import 'package:music_streaming_app/core/extensions/extension.dart';
+import 'package:music_streaming_app/data/models/song_model.dart';
 import 'package:music_streaming_app/presentation/pages/details_screen.dart';
 
 class MusicList extends StatefulWidget {
-  const MusicList({super.key, required this.title});
+  const MusicList({super.key, required this.title, required this.songs});
 final String title;
+final List<SongModel> songs;
   @override
   State<MusicList> createState() => _MusicListState();
 }
@@ -48,23 +50,24 @@ class _MusicListState extends State<MusicList> {
           child: ListView.builder(
             controller: _scrollController,
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: widget.songs.length,
               itemBuilder: (context, index) {
-                final int leftmostIndex = (_scrollController.offset * 0.85 / itemBaseWidth).floor();
+              print(_scrollController.offset);
+                final int leftmostIndex = (_scrollController.offset /  (itemBaseWidth.floor() )).floor();
                 final bool isLeftmost = index == leftmostIndex;
                 double dynamicSize = isSoothYourself ? isLeftmost ? itemBaseWidth *2 : itemBaseWidth: itemBaseWidth;
-                return songBox(isSoothYourself, dynamicSize, textTheme,context);
+                return songBox(isSoothYourself, dynamicSize, textTheme,context,widget.songs[index]);
               }),
         ),
       ],
     );
   }
 
-  Widget songBox(bool isSoothYourself,double dynamicSize, TextTheme textTheme,BuildContext context){
+  Widget songBox(bool isSoothYourself,double dynamicSize, TextTheme textTheme,BuildContext context,SongModel song){
     return GestureDetector(
       onTap: ()=> Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const DetailsScreen()),
+        MaterialPageRoute(builder: (context) =>  DetailsScreen(song: song,title: widget.title,)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,24 +77,31 @@ class _MusicListState extends State<MusicList> {
             child: 1.heightSizedBox,
           )
               : const SizedBox.shrink(),
-          Container(
-            width: dynamicSize,
-            height: dynamicSize,
-            decoration: BoxDecoration(
-              color: AppColors.greyColor,
-              borderRadius:  widget.title == StringConstants.monthlyHits
-                  ? null
-                  : BorderRadius.circular(4),
-              shape:  widget.title == StringConstants.monthlyHits
-                  ? BoxShape.circle
-                  : BoxShape.rectangle,
+          Hero(
+            tag: song.name + widget.title,
+            child: Container(
+              width: dynamicSize,
+              height: dynamicSize,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(song.albumArt),
+                  fit: BoxFit.cover,
+                ),
+                color: Theme.of(context).primaryColor,
+                borderRadius:  widget.title == StringConstants.monthlyHits
+                    ? null
+                    : BorderRadius.circular(4),
+                shape:  widget.title == StringConstants.monthlyHits
+                    ? BoxShape.circle
+                    : BoxShape.rectangle,
+              ),
             ),
           ),
           Text(
-            "Raju ki cha",
+            song.name,
             style: textTheme.titleLarge,
           ),
-          Text("Albert",
+          Text(song.artist.first,
               style: textTheme.titleMedium!.copyWith(fontSize: 10))
         ],
       ).paddingLTRB(right: 0.05.sw),

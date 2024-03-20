@@ -41,6 +41,10 @@ class _IconButtonWidgetState extends State<IconButtonWidget> {
       _icon = Icons.favorite;
     } else if (_icon == Icons.favorite) {
       _icon = Icons.favorite_border;
+    } else if (_icon == Icons.play_arrow) {
+      _icon = Icons.pause;
+    } else if (_icon == Icons.pause) {
+      _icon = Icons.play_arrow;
     }
   }
 
@@ -48,19 +52,21 @@ class _IconButtonWidgetState extends State<IconButtonWidget> {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
+        _toggleIcon();
         if (_willColorChange) {
-          setState(() {
-            _toggleIcon();
-            _color = _color == Colors.black || _color == Colors.white ? Colors.red
-                : Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black;
-          });
+          _color = _color == Colors.black || _color == Colors.white
+              ? Colors.red
+              : Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black;
         }
+        setState(() {});
         widget.onPress?.call();
       },
       icon: Icon(
         _icon,
         color: _color,
-        size: _icon == Icons.play_arrow ? 40 : 22,
+        size: _icon == Icons.play_arrow || _icon == Icons.pause ? 40 : 22,
       ),
     );
   }

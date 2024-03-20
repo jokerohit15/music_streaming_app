@@ -17,4 +17,5 @@ abstract class  StringConstants {
   static const String party = "Party";
   static const String soothYourself = "Sooth Yourself";
   static const String home ="Home";
+  static const String musicStreamDoc = "Lmjz0bGxMxJzWozbHkOQ";
 }

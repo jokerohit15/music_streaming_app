@@ -7,9 +7,12 @@ import 'package:music_streaming_app/core/service_locator.dart';
 import 'package:music_streaming_app/core/theme/app_theme.dart';
 import 'package:music_streaming_app/core/theme/theme_provider.dart';
 import 'package:music_streaming_app/presentation/bloc/login/login_cubit.dart';
+import 'package:music_streaming_app/presentation/bloc/search/search_cubit.dart';
 import 'package:music_streaming_app/presentation/pages/details_screen.dart';
 import 'package:music_streaming_app/presentation/pages/home_screen.dart';
 import 'package:music_streaming_app/presentation/pages/login_screen.dart';
+import 'package:music_streaming_app/presentation/pages/main_screen.dart';
+import 'package:music_streaming_app/presentation/pages/search_screen.dart';
 import 'package:music_streaming_app/presentation/widgets/music_list.dart';
 import 'package:provider/provider.dart';
 
@@ -34,17 +37,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ThemeProvider(),
-      child: Consumer<ThemeProvider>(
-        builder: (context, themeProvider, _) {
-          return  MaterialApp(
-            home: const HomeScreen(),
-           // home: DetailsScreen(),
-            theme: themeProvider.currentTheme,
-          );
-        },
-      ),
+    return BlocProvider<SearchCubit>(
+        create: (context) => getIt<SearchCubit>(),
+        child: ChangeNotifierProvider(
+          create: (_) => ThemeProvider(),
+          child: Consumer<ThemeProvider>(
+            builder: (context, themeProvider, _) {
+              return  MaterialApp(
+               // home: const HomeScreen(),
+               // home: DetailsScreen(),
+                home: MainScreen(),
+                theme: themeProvider.currentTheme,
+              );
+            },
+          ),
+        ),
     );
   }
 }
