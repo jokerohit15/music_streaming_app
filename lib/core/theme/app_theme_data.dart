@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:music_streaming_app/core/app_constants/app_colors.dart';
-import 'package:music_streaming_app/core/app_constants/app_images.dart';
 
 class AppThemeData {
   final Color primaryColor;
@@ -11,11 +10,11 @@ class AppThemeData {
   final String fontFamily;
   final TextStyle titleLargeTextStyle;
   final TextStyle titleMediumTextStyle;
-  final String package;
   final Color primaryColorLight;
   final Color primaryColorDark;
+  final InputDecorationTheme   inputDecorationTheme;
 
-  AppThemeData({
+  AppThemeData( {
     required this.primaryColor,
     required this.primaryColorLight,
     required this.primaryColorDark,
@@ -26,26 +25,42 @@ class AppThemeData {
     required this.fontFamily,
     required this.titleLargeTextStyle,
     required this.titleMediumTextStyle,
-    required this.package,
+    required this.inputDecorationTheme,
   });
 
   factory AppThemeData.lightTheme() {
     return AppThemeData(
-        primaryColor: AppColors.secondaryColor,
-        primaryColorLight: AppColors.whiteColor,
-        primaryColorDark: AppColors.blackColor,
-        displayLargeTextStyle: const TextStyle(
-            fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
-        bodyMediumTextStyle: const TextStyle(fontSize: 14, color: Colors.black),
-        titleLargeTextStyle: const TextStyle(
-            fontSize: 12, color: Colors.black, fontWeight: FontWeight.bold),
-        titleMediumTextStyle: const TextStyle(
-            fontSize: 10, color: Colors.grey, fontWeight: FontWeight.bold),
-        buttonLarge: const TextStyle(
-            fontSize: 16, fontWeight: FontWeight.w500, color: Colors.blue),
-        brightness: Brightness.light,
-        fontFamily: 'Louis George Cafe',
-        package: AppImages.blurredEllipseWhite);
+      primaryColor: AppColors.secondaryColor,
+      primaryColorLight: AppColors.whiteColor,
+      primaryColorDark: AppColors.blackColor,
+      displayLargeTextStyle: const TextStyle(
+          fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+      bodyMediumTextStyle: const TextStyle(fontSize: 14, color: Colors.black),
+      titleLargeTextStyle: const TextStyle(
+          fontSize: 12, color: Colors.black, fontWeight: FontWeight.bold),
+      titleMediumTextStyle: const TextStyle(
+          fontSize: 10, color: Colors.grey, fontWeight: FontWeight.bold),
+      buttonLarge: const TextStyle(
+          fontSize: 16, fontWeight: FontWeight.w500, color: Colors.blue),
+      brightness: Brightness.light,
+      fontFamily: 'Louis George Cafe',
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.grey),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: AppColors.blackColor),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: AppColors.secondaryColor.withOpacity(0.5)),
+        ),
+        disabledBorder: InputBorder.none,
+        outlineBorder:  BorderSide(color: AppColors.secondaryColor.withOpacity(0.5)),
+      ),
+    );
   }
 
   factory AppThemeData.darkTheme() {
@@ -66,7 +81,22 @@ class AppThemeData {
           color: Colors.lightBlueAccent),
       brightness: Brightness.dark,
       fontFamily: 'Louis George Cafe',
-      package: AppImages.blurredEllipseBlack,
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.grey),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: AppColors.whiteColor),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: AppColors.brandColor),
+        ),
+        disabledBorder: InputBorder.none,
+        outlineBorder: const BorderSide(color: AppColors.brandColor),
+      ),
     );
   }
 }

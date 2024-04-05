@@ -1,16 +1,16 @@
 
 import 'package:music_streaming_app/data/models/song_model.dart';
 
-abstract class SongState {}
+abstract class SearchState {}
 
-class SearchInitial extends SongState {}
+class SearchInitial extends SearchState {}
 
-class SongsLoaded extends SongState {
+class SearchLoaded extends SearchState {
   final List<SongModel> songs;
-  SongsLoaded(this.songs);
+  SearchLoaded(this.songs);
 }
 
-class SongsError extends SongState {
+class SearchError extends SearchState {
   final String message;
-  SongsError(this.message);
+  SearchError(this.message);
 }

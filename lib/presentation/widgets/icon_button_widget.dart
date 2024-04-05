@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_streaming_app/core/app_constants/app_colors.dart';
 
 class IconButtonWidget extends StatefulWidget {
   final IconData icon;
@@ -25,37 +26,24 @@ class _IconButtonWidgetState extends State<IconButtonWidget> {
   void initState() {
     super.initState();
     _icon = widget.icon;
-    _color = widget.isDark ? Colors.white : Colors.black;
+    _color =  widget.isDark ? Colors.white : Colors.black;
     _willColorChange = _shouldColorChange(_icon);
   }
 
   bool _shouldColorChange(IconData icon) {
     return icon == Icons.shuffle ||
-        icon == Icons.repeat_one ||
-        icon == Icons.favorite_border ||
-        icon == Icons.favorite;
+        icon == Icons.repeat_one;
   }
 
-  void _toggleIcon() {
-    if (_icon == Icons.favorite_border) {
-      _icon = Icons.favorite;
-    } else if (_icon == Icons.favorite) {
-      _icon = Icons.favorite_border;
-    } else if (_icon == Icons.play_arrow) {
-      _icon = Icons.pause;
-    } else if (_icon == Icons.pause) {
-      _icon = Icons.play_arrow;
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        _toggleIcon();
         if (_willColorChange) {
           _color = _color == Colors.black || _color == Colors.white
-              ? Colors.red
+              ? AppColors.brandColor
               : Theme.of(context).brightness == Brightness.dark
                   ? Colors.white
                   : Colors.black;
@@ -66,7 +54,7 @@ class _IconButtonWidgetState extends State<IconButtonWidget> {
       icon: Icon(
         _icon,
         color: _color,
-        size: _icon == Icons.play_arrow || _icon == Icons.pause ? 40 : 22,
+        size:  22,
       ),
     );
   }

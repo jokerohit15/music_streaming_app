@@ -56,6 +56,9 @@ extension ExtBuildContext on BuildContext {
   void replaceOnlyNamed(String screen, Object? argument) {
     Navigator.of(this).pushReplacementNamed(screen, arguments: argument);
   }
+
+
+
 //
 // void showError(String message, {Duration? duration, FlushbarStatusCallback? onStatusChanged}) {
 //   HapticFeedback.heavyImpact();

@@ -19,3 +19,20 @@ extension SizeBoxExtension on int {
 
   Widget get expandedHeightSizedBox => Expanded(child: SizedBox(height: toDouble()));
 }
+
+
+
+extension SizeExtension on double{
+
+ double widthSize(BuildContext context){
+    final isWideScreen = MediaQuery.of(context).size.width > 600;
+    return isWideScreen ? sh : sw;
+  }
+
+ double heightSize(BuildContext context){
+   final isWideScreen = MediaQuery.of(context).size.width > 600;
+   return isWideScreen ? sw : sh;
+ }
+
+}
+

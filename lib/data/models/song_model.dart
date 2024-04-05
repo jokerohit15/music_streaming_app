@@ -1,5 +1,6 @@
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:music_streaming_app/core/app_constants/app_keys.dart';
 
 class SongModel{
@@ -9,10 +10,12 @@ class SongModel{
   final String albumArt;
   final List<dynamic> artist;
   final int yearOfRelease;
+  final DocumentReference reference;
+  bool isLiked;
 
-  SongModel({required this.name, required this.album, required this.audio, required this.albumArt, required this.artist, required this.yearOfRelease});
+  SongModel({required this.name, required this.album, required this.audio, required this.albumArt, required this.artist, required this.yearOfRelease,required this.reference,this.isLiked= false});
 
-  factory SongModel.fromJson(Map<String, dynamic> data) {
+  factory SongModel.fromJson(Map<String, dynamic> data,DocumentReference reference) {
   return SongModel(
       name : data[AppKeys.nameKey],
       album : data[AppKeys.albumKey],
@@ -20,6 +23,7 @@ class SongModel{
       albumArt : data[AppKeys.albumArtKey],
       artist:data[AppKeys.artistKey],
       yearOfRelease: data[AppKeys.yearOfReleaseKey]??11,
+      reference: reference,
   );
   }
 

@@ -3,9 +3,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:music_streaming_app/core/theme/app_theme_data.dart';
+import 'package:music_streaming_app/domain/use_cases/get_theme.dart';
+import 'package:music_streaming_app/domain/use_cases/save_theme.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  bool _isDarkMode = false;
+  late bool _isDarkMode;
+  final GetTheme getTheme;
+  final SaveTheme saveTheme;
+
+  ThemeProvider(this.getTheme, this.saveTheme);
+
+
+
+  void assignTheme(BuildContext context)  {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+    _isDarkMode =  getTheme() ?? isDarkMode;
+  }
 
   bool get isDarkMode => _isDarkMode;
 
@@ -18,7 +32,7 @@ class ThemeProvider extends ChangeNotifier {
     primaryColorDark:currentThemeData.primaryColorDark,
     brightness: currentThemeData.brightness,
     fontFamily: currentThemeData.fontFamily,
-    package: currentThemeData.package,
+    inputDecorationTheme: currentThemeData.inputDecorationTheme,
     textTheme: TextTheme(
       displayLarge: currentThemeData.displayLargeTextStyle,
       bodyMedium: currentThemeData.bodyMediumTextStyle,
@@ -30,6 +44,7 @@ class ThemeProvider extends ChangeNotifier {
 
   void toggleTheme() {
     _isDarkMode = !_isDarkMode;
+    saveTheme(_isDarkMode);
     notifyListeners();
   }
 }

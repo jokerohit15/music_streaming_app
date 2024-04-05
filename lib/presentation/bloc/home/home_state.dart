@@ -22,8 +22,13 @@ class HomeLoading extends HomeState{
 class HomeLoaded extends HomeState{
 
 final List<Filters> filterList;
+final List<SongModel> songList;
+final List<SongModel> monthlyHits;
+final String userName;
+final int filterIndex;
 
-  HomeLoaded({required this.filterList});
+
+  HomeLoaded({required this.songList, required this.monthlyHits,required this.userName,required this.filterList,required this.filterIndex});
 }
 
 class HomeError extends HomeState{
