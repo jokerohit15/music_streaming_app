@@ -47,7 +47,7 @@ class TopBarWidget extends StatelessWidget {
                       cacheWidth: (0.2.widthSize(context)).toInt(),
                     ),
                   ),
-                  Text("Change Theme",style: Theme.of(context).textTheme.titleLarge,)
+                  Expanded(child: Text(StringConstants.changeTheme,style: Theme.of(context).textTheme.titleLarge,))
                 ],
               ),
             ),

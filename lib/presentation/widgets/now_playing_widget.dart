@@ -2,21 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:music_streaming_app/core/app_constants/app_colors.dart';
 import 'package:music_streaming_app/core/extensions/extension.dart';
 import 'package:music_streaming_app/presentation/bloc/details/details_cubit.dart';
 import 'package:music_streaming_app/presentation/bloc/details/details_state.dart';
 import 'package:music_streaming_app/presentation/pages/details_screen/widgets/play_buttons.dart';
-import 'package:music_streaming_app/presentation/widgets/icon_button_widget.dart';
 
-class NowPlayingWidget extends StatefulWidget {
+class NowPlayingWidget extends StatelessWidget {
   const NowPlayingWidget({super.key});
 
-  @override
-  State<NowPlayingWidget> createState() => _NowPlayingWidgetState();
-}
-
-class _NowPlayingWidgetState extends State<NowPlayingWidget> {
   @override
   Widget build(BuildContext context) {
     return     BlocBuilder<DetailsCubit, DetailsState>

@@ -8,14 +8,9 @@ import 'package:music_streaming_app/core/extensions/extension.dart';
 import 'package:music_streaming_app/presentation/bloc/main/main_cubit.dart';
 import 'package:music_streaming_app/presentation/bloc/main/main_state.dart';
 
-class NavigatorBar extends StatefulWidget {
+class NavigatorBar extends StatelessWidget {
   const NavigatorBar({super.key});
 
-  @override
-  State<NavigatorBar> createState() => _NavigatorBarState();
-}
-
-class _NavigatorBarState extends State<NavigatorBar> {
   @override
   Widget build(BuildContext context) {
     return elevated(context);
@@ -91,7 +86,6 @@ class _NavigatorBarState extends State<NavigatorBar> {
             Text(title,
                 style: Theme.of(context).textTheme.bodySmall),
             Container(
-           //   height: 0.03.heightSize(context),
               height: 5,
               width: 40,
               decoration: BoxDecoration(

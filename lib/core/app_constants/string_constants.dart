@@ -37,4 +37,5 @@ abstract class  StringConstants {
   static const String passwordValidationError = "Password must contain a letter and a number";
   static const String likedSongs = "Liked Songs";
   static const String logout = "Log Out";
+  static const String changeTheme = "Change Theme";
 }

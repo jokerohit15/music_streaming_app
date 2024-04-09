@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:music_streaming_app/core/app_constants/app_colors.dart';
-import 'package:music_streaming_app/core/app_constants/app_images.dart';
 import 'package:music_streaming_app/core/app_constants/string_constants.dart';
 import 'package:music_streaming_app/core/extensions/extension.dart';
-import 'package:music_streaming_app/core/service_locator.dart';
-import 'package:music_streaming_app/core/theme/theme_provider.dart';
 import 'package:music_streaming_app/data/models/song_model.dart';
-import 'package:music_streaming_app/presentation/bloc/auth/auth_cubit.dart';
-import 'package:music_streaming_app/presentation/bloc/home/home_cubit.dart';
 import 'package:music_streaming_app/presentation/bloc/search/search_cubit.dart';
 import 'package:music_streaming_app/presentation/bloc/search/search_state.dart';
 import 'package:music_streaming_app/presentation/routes/app_routes.dart';
@@ -19,12 +13,14 @@ import 'package:music_streaming_app/presentation/widgets/like_button_widget.dart
 import 'package:music_streaming_app/presentation/widgets/sliver_error_widget.dart';
 import 'package:music_streaming_app/presentation/widgets/top_bar_widget.dart';
 
+
+
+
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+  const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
     return CustomScrollView(
         controller: context.read<SearchCubit>().scrollController,
         slivers: <Widget>[

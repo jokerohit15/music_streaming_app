@@ -5,7 +5,6 @@ import 'package:music_streaming_app/core/service_locator.dart';
 import 'package:music_streaming_app/data/models/song_model.dart';
 import 'package:music_streaming_app/presentation/bloc/like_buton/like_button_cubit.dart';
 import 'package:music_streaming_app/presentation/bloc/like_buton/like_button_state.dart';
-import 'package:music_streaming_app/presentation/bloc/main/main_cubit.dart';
 
 class LikeButtonWidget extends StatelessWidget {
   const LikeButtonWidget(
